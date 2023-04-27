@@ -65,4 +65,27 @@ class HttpClient {
 
     return createdNote;
   }
+
+  Future<Note?> updateNote({
+    required String id,
+    required NoteInput noteInput,
+  }) async {
+    Note? updatedNote;
+    try {
+      Response response = await _dio.put(
+        '$_baseUrl/notes/$id',
+        data: noteInput.toJson(),
+      );
+
+      updatedNote = Note.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print('Error occurred in Dio');
+      } else {
+        print('Error when sending request: ${e.message}');
+      }
+    }
+
+    return updatedNote;
+  }
 }

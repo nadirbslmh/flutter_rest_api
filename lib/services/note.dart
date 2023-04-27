@@ -27,4 +27,12 @@ class NoteService {
     var note = await client.createNote(noteInput: noteInput);
     return note;
   }
+
+  Future<Note?> updateNote({
+    required String id,
+    required NoteInput noteInput,
+  }) async {
+    var note = await client.updateNote(id: id, noteInput: noteInput);
+    return note;
+  }
 }

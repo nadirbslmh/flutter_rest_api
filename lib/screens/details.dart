@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rest_api/helpers/http_client.dart';
 import 'package:flutter_rest_api/models/note.dart';
+import 'package:flutter_rest_api/screens/edit.dart';
 import 'package:flutter_rest_api/services/note.dart';
 
 class NoteDetailsScreen extends StatefulWidget {
@@ -78,7 +79,15 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
               ],
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => EditNoteScreen(
+                noteID: _note!.id,
+              ),
+            ),
+          );
+        },
         child: const Icon(Icons.edit),
       ),
     );
