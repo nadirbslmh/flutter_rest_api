@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_rest_api/models/note.dart';
+import 'package:flutter_rest_api/models/note_input.dart';
 
 class HttpClient {
   final Dio _dio = Dio();
@@ -41,5 +42,27 @@ class HttpClient {
     }
 
     return note;
+  }
+
+  Future<Note?> createNote({
+    required NoteInput noteInput,
+  }) async {
+    Note? createdNote;
+    try {
+      Response response = await _dio.post(
+        '$_baseUrl/notes',
+        data: noteInput.toJson(),
+      );
+
+      createdNote = Note.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print('Error occurred in Dio');
+      } else {
+        print('Error when sending request: ${e.message}');
+      }
+    }
+
+    return createdNote;
   }
 }

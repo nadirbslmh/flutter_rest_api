@@ -1,5 +1,6 @@
 import 'package:flutter_rest_api/helpers/http_client.dart';
 import 'package:flutter_rest_api/models/note.dart';
+import 'package:flutter_rest_api/models/note_input.dart';
 
 class NoteService {
   const NoteService({
@@ -17,6 +18,13 @@ class NoteService {
     required String id,
   }) async {
     var note = await client.getNoteByID(id: id);
+    return note;
+  }
+
+  Future<Note?> createNote({
+    required NoteInput noteInput,
+  }) async {
+    var note = await client.createNote(noteInput: noteInput);
     return note;
   }
 }

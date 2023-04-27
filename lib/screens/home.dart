@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rest_api/helpers/http_client.dart';
 import 'package:flutter_rest_api/models/note.dart';
+import 'package:flutter_rest_api/screens/add.dart';
 import 'package:flutter_rest_api/screens/details.dart';
 import 'package:flutter_rest_api/services/note.dart';
 
@@ -73,7 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const AddNoteScreen(),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
