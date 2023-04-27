@@ -24,4 +24,22 @@ class HttpClient {
 
     return notes;
   }
+
+  Future<Note?> getNoteByID({
+    required String id,
+  }) async {
+    Note? note;
+    try {
+      Response response = await _dio.get('$_baseUrl/notes/$id');
+      note = Note.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print('Error occurred in Dio');
+      } else {
+        print('Error when sending request: ${e.message}');
+      }
+    }
+
+    return note;
+  }
 }

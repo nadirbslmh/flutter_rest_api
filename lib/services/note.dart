@@ -12,4 +12,11 @@ class NoteService {
     var notes = await client.getNotes();
     return notes;
   }
+
+  Future<Note?> getNoteByID({
+    required String id,
+  }) async {
+    var note = await client.getNoteByID(id: id);
+    return note;
+  }
 }

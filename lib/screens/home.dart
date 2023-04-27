@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rest_api/helpers/http_client.dart';
 import 'package:flutter_rest_api/models/note.dart';
+import 'package:flutter_rest_api/screens/details.dart';
 import 'package:flutter_rest_api/services/note.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -58,7 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => NoteDetailsScreen(
+                            noteID: _notes![index].id,
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
