@@ -88,4 +88,25 @@ class HttpClient {
 
     return updatedNote;
   }
+
+  Future<Note?> deleteNote({
+    required String id,
+  }) async {
+    Note? deletedNote;
+    try {
+      Response response = await _dio.delete(
+        '$_baseUrl/notes/$id',
+      );
+
+      deletedNote = Note.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print('Error occurred in Dio');
+      } else {
+        print('Error when sending request: ${e.message}');
+      }
+    }
+
+    return deletedNote;
+  }
 }

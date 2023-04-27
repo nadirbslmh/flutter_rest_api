@@ -30,6 +30,27 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
+  void _deleteNote() async {
+    _note = await service.deleteNote(id: widget.noteID);
+    Future.delayed(const Duration(seconds: 1)).then((_) {
+      Navigator.of(context).pop();
+      _showMessage();
+    });
+  }
+
+  void _showMessage() {
+    if (_note!.id.isNotEmpty) {
+      final snackBar = SnackBar(
+        content: const Text('Note deleted!'),
+        action: SnackBarAction(
+          label: 'Close',
+          onPressed: () {},
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -45,7 +66,7 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _deleteNote,
             icon: const Icon(Icons.delete),
           ),
         ],

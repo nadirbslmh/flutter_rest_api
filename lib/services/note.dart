@@ -35,4 +35,11 @@ class NoteService {
     var note = await client.updateNote(id: id, noteInput: noteInput);
     return note;
   }
+
+  Future<Note?> deleteNote({
+    required String id,
+  }) async {
+    var note = await client.deleteNote(id: id);
+    return note;
+  }
 }
